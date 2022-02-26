@@ -93,7 +93,6 @@ describe("MyToken", () => {
         spender.address,
         ethers.utils.parseEther("2")
       );
-      console.log(await txn.wait());
       // allowance now==2
       // console.log(
       //   await MyTokenContract.allowance(owner.address, spender.address)
@@ -127,9 +126,6 @@ describe("MyToken", () => {
         await MyTokenContract.allowance(owner.address, spender.address)
       ).to.equal(ethers.utils.parseEther("3"));
 
-      console.log(
-        await MyTokenContract.allowance(owner.address, spender.address)
-      );
       await MyTokenContract.connect(spender).transferFrom(
         owner.address,
         accounts[0].address,
@@ -137,10 +133,6 @@ describe("MyToken", () => {
       );
       expect(await MyTokenContract.balanceOf(accounts[0].address)).to.equal(
         ethers.utils.parseEther("2")
-      );
-      console.log(
-        "after txn",
-        await MyTokenContract.allowance(owner.address, spender.address)
       );
     });
   });
